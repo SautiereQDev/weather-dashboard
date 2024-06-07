@@ -8,14 +8,12 @@ const Carousel = ({components, nbElements}) => {
     const handleDecrement = () => {
         if (index < (components.length - nbElements)) {
             setIndex(index => index + 1)
-            console.log(elementsDisplayed)
         }
     }
 
     const handleIncrement = () => {
         if (index > (0 + nbElements)) {
             setIndex(index => index - 1)
-            console.log(elementsDisplayed)
         }
     }
 
