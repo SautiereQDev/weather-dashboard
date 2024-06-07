@@ -22,10 +22,9 @@ const Forecast = () => {
         return <p>Loading...</p>
     }
     return (
-        <div className='flex gap-2'>
+        <div className='flex gap-2 mt-6'>
             {/*crée une card pour chaques heures de la journée suivante*/}
-            {/*{data.forecast.forecastday[0].hour.map(hour => <Card data={hour} type={"hour"} key={hour.time}/>)}*/}
-            <Carousel components={data.forecast.forecastday[0].hour.map((hour, index) => <Card data={hour} type={"hour"} key={index}/>)} nbElements={4}/>
+            <Carousel components={data.forecast.forecastday[0].hour.map((hour, index) => <Card data={hour} type={"hour"} key={index}/>)} nbElements={8}/>
         </div>
 
     );
