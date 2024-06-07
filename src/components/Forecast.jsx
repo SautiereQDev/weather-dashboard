@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Card from "./Card.jsx";
+import Carousel from "./Carousel.jsx";
 
 const Forecast = () => {
     const [data, setData] = useState(null);
@@ -23,8 +24,10 @@ const Forecast = () => {
     return (
         <div className='flex gap-2'>
             {/*crée une card pour chaques heures de la journée suivante*/}
-            {data.forecast.forecastday[0].hour.map(hour => <Card data={hour} type={"hour"} key={hour.time}/>)}
+            {/*{data.forecast.forecastday[0].hour.map(hour => <Card data={hour} type={"hour"} key={hour.time}/>)}*/}
+            <Carousel components={data.forecast.forecastday[0].hour.map((hour, index) => <Card data={hour} type={"hour"} key={index}/>)} nbElements={4}/>
         </div>
+
     );
 };
 
