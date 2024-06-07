@@ -22,8 +22,8 @@ const Forecast = () => {
         return <p>Loading...</p>
     }
     return (
-        <div className='flex gap-2 mt-6'>
-            {/*crée une card pour chaques heures de la journée suivante*/}
+        <div className='mt-6'>
+            <p className="text-4xl font-bold">Météo {data.location.name}</p>
             <Carousel components={data.forecast.forecastday[0].hour.map((hour, index) => <Card data={hour} type={"hour"} key={index}/>)} nbElements={8}/>
         </div>
 
