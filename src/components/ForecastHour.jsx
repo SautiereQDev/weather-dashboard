@@ -3,7 +3,7 @@ import Card from "./Card.jsx";
 import Carousel from "./Carousel.jsx";
 import {LuArrowDown, LuArrowUp, LuSun} from "react-icons/lu";
 
-const Forecast = () => {
+const ForecastHour = ({day}) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true)
 
@@ -22,6 +22,8 @@ const Forecast = () => {
     if(loading){
         return <p>Loading...</p>
     }
+    // TODO : Avoir une recherche de ville fonctionnelle
+    // TODO : Permettre de choisir entre une vue heure par heure ou jours par jours
     return (
         <div className='mt-6'>
             <header className="ml-4 mb-6">
@@ -38,20 +40,21 @@ const Forecast = () => {
                             <LuArrowUp size={18}/>
                             <span
                                 className="font-bold mr-0.5">{data.forecast.forecastday[0].astro.sunrise.split(' ')[0]}
-                            </span>{data.forecast.forecastday[0].astro.sunrise.split(' ')[1]}
+                            </span>{data.forecast.forecastday[day].astro.sunrise.split(' ')[1]}
                         </span>
                         {/*Coucher de soleil*/}
                         <span className="flex items-center">
                             <LuArrowDown size={18}/>
                             <span
                                 className="font-bold mr-0.5">{data.forecast.forecastday[0].astro.sunset.split(' ')[0]}</span>
-                            {data.forecast.forecastday[0].astro.sunset.split(' ')[1]}
+                            {data.forecast.forecastday[day].astro.sunset.split(' ')[1]}
                         </span>
                     </p>
                 </div>
                 <hr className="mb-4 mt-1 border-gray-400"/>
+                {/* TODO : ne pas afficher les cards de previsions des heures déjà écoulés*/}
                 <Carousel
-                    components={data.forecast.forecastday[0].hour.map((hour) => <Card data={hour} type={"hour"}
+                    components={data.forecast.forecastday[day].hour.map((hour) => <Card data={hour} type={"hour"}
                                                                                       key={hour.time}/>)}
                     nbElements={8}/>
             </main>
@@ -61,4 +64,4 @@ const Forecast = () => {
     );
 };
 
-export default Forecast;
+export default ForecastHour;
