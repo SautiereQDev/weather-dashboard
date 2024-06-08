@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Carousel from "./Carousel.jsx";
 import Card from "./Card.jsx";
 import {LuArrowDown, LuArrowUp, LuSun} from "react-icons/lu";
+import {Link} from "react-router-dom";
 
 const ForecastDay = () => {
 	const [data, setData] = useState(null);
@@ -52,9 +53,11 @@ const ForecastDay = () => {
 				</div>
 				<hr className="mb-4 mt-1 border-gray-400"/>
 				<Carousel
-					components={data.forecast.forecastday.map((day, index) => <Card data={day} type={"day"}
-					                                                                key={day.date}
-					                                                                index={index}/>)}
+					components={data.forecast.forecastday.map((day, index) => (
+						<Link to={`/forecast/hour/${index}`} key={day.date}>
+							<Card data={day} type={"day"}/>
+						</Link>
+					))}
 					nbElements={8}/>
 			</main>
 

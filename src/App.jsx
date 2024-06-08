@@ -15,10 +15,7 @@ export const App = () => {
         },
         {
             path: 'forecast',
-            element: <>
-                <p>Forecast</p>
-                <Outlet/>
-            </>,
+            element: <Outlet/>,
             children: [
                 {
                     path: 'day',
@@ -26,7 +23,7 @@ export const App = () => {
                 },
                 {
                     path: 'hour/:id',
-                    element: <ForecastHour dayNumber={0}/>
+                    element: <ForecastHour/>
                 }
             ]
         }
