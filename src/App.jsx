@@ -2,11 +2,40 @@ import {createContext, useState} from "react";
 import {NavBar} from "./components/NavBar.jsx";
 import useSearch from "./hooks/useSearch.jsx";
 import ForecastDay from "./components/ForecastDay.jsx";
+import {Outlet, useRoutes} from "react-router-dom";
+import ForecastHour from "./components/ForecastHour.jsx";
 
-export const ThemeContext = createContext(null)
+export const ThemeContext = createContext(null);
 
 export const App = () => {
+    const routes = useRoutes([
+        {
+            path: '/',
+            element: <Root/>,
+        },
+        {
+            path: 'forecast',
+            element: <>
+                <p>Forecast</p>
+                <Outlet/>
+            </>,
+            children: [
+                {
+                    path: 'day',
+                    element: <ForecastDay/>
+                },
+                {
+                    path: 'hour/:id',
+                    element: <ForecastHour dayNumber={0}/>
+                }
+            ]
+        }
+    ])
 
+    return routes
+}
+
+function Root() {
     const [ville, setVille] = useState('');
 
     function handleSubmit(ev) {
@@ -15,6 +44,7 @@ export const App = () => {
     }
 
     const [theme, setTheme] = useState('light')
+
     return (
         <ThemeContext.Provider value={{theme, setTheme}}>
             <NavBar/>
@@ -28,9 +58,8 @@ export const App = () => {
                     </button>
                 </form>
             </main>
-            <ForecastDay data={useSearch(ville)} day={0}/>
-        </ThemeContext.Provider>
-    )
+            <ForecastDay/>
+        </ThemeContext.Provider>)
 }
 
 export default App;

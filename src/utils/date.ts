@@ -6,3 +6,7 @@ export function dateToHour(date : string) : string{
   //conversion du format 'HH:MM' vers 'HHhMM'
   return hour.split(':').join('h')
 }
+
+export function formatDate(date: string) {
+  return date.split('-').reverse().join('-');
+}

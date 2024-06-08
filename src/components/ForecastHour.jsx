@@ -2,8 +2,10 @@ import React, {useEffect, useState} from "react";
 import Card from "./Card.jsx";
 import Carousel from "./Carousel.jsx";
 import {LuArrowDown, LuArrowUp, LuSun} from "react-icons/lu";
+import {useParams} from "react-router-dom";
 
-const ForecastHour = ({day}) => {
+const ForecastHour = () => {
+    const {id} = useParams();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true)
 
@@ -32,30 +34,34 @@ const ForecastHour = ({day}) => {
             </header>
             <main>
                 <div className="flex justify-between">
-                    <p className="text-xl ml-4">Aujourd'hui</p>
+                    <p className="text-xl ml-4">{data.forecast.forecastday[id].date}</p>
                     <p className="flex items-center gap-2 mr-4">
                         <LuSun size={26} className="mr-1"/>
+
                         {/*Lever de soleil*/}
                         <span className="flex items-center">
                             <LuArrowUp size={18}/>
                             <span
                                 className="font-bold mr-0.5">{data.forecast.forecastday[0].astro.sunrise.split(' ')[0]}
-                            </span>{data.forecast.forecastday[day].astro.sunrise.split(' ')[1]}
+                            </span>{data.forecast.forecastday[id].astro.sunrise.split(' ')[1]}
                         </span>
+
                         {/*Coucher de soleil*/}
                         <span className="flex items-center">
                             <LuArrowDown size={18}/>
                             <span
                                 className="font-bold mr-0.5">{data.forecast.forecastday[0].astro.sunset.split(' ')[0]}</span>
-                            {data.forecast.forecastday[day].astro.sunset.split(' ')[1]}
+                            {data.forecast.forecastday[id].astro.sunset.split(' ')[1]}
                         </span>
                     </p>
                 </div>
                 <hr className="mb-4 mt-1 border-gray-400"/>
                 {/* TODO : ne pas afficher les cards de previsions des heures déjà écoulés*/}
+
+                {/*Affichage du carousel des cards heures par heures*/}
                 <Carousel
-                    components={data.forecast.forecastday[day].hour.map((hour) => <Card data={hour} type={"hour"}
-                                                                                      key={hour.time}/>)}
+                    components={data.forecast.forecastday[id].hour.map((hour, index) => <Card data={hour} type={"hour"}
+                                                                                              key={hour.time}/>)}
                     nbElements={8}/>
             </main>
 
