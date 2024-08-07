@@ -34,9 +34,7 @@ const ForecastCard = () => {
 
 	return (
 		<div className="border py-3 mt-3 text-center box-border">
-			<p className="text-md">{data.forecast.forecastday[0].hour[0].time}</p>
-			<h2 className="text-xl font-bold">{data.forecast.forecastday[0].hour[0].condition.text}</h2>
-			<img src={data.forecast.forecastday[0].hour[0].condition.icon} alt="weather condition icon" className="border m-auto mt-2"/>
+
 		</div>
 	);
 };
