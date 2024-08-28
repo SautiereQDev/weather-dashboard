@@ -2,16 +2,23 @@ import NavBar from "./components/NavBar.jsx";
 import Card from "./components/Card.jsx";
 import { useCityContext } from "./contexts/CityContext.jsx";
 import {WeatherProvider} from "./contexts/WeatherContext.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {getCurrentDate, getUpdatedDate} from "@/utils/date.ts";
 
 const App = () => {
 	const { city } = useCityContext();
 	const [day, setDay] = useState(0)
+	const [date, setDate] = useState(getCurrentDate());
+
+	useEffect(() => {
+		setDate(getUpdatedDate(day));
+	}, [day]);
 
 	return (
 		<WeatherProvider>
 			<NavBar />
 			<h1 className="text-4xl font-bold text-center mt-3">Météo à {city}</h1>
+			<h2 className="text-xl text-center">{date}</h2>
 			<div className="flex gap-4 justify-evenly mt-6 mx-4">
 				{[...Array(9)].map((_, i) => (
 					<Card key={i} index={i} day={day} />
