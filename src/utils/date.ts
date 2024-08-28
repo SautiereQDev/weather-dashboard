@@ -1,12 +1,12 @@
-// récupère la date au format 'YYYY-MM-DD HH:MM' et renvoi 'HHh MM'
-export function dateToHour(date : string) : string{
+import { format, parse } from 'date-fns';
 
-  //extraction des heures
-  const hour = date.split(' ')[1]
-  //conversion du format 'HH:MM' vers 'HHhMM'
-  return hour.split(':').join('h')
-}
-
-export function formatDate(date: string) {
-  return date.split('-').reverse().join('-');
-}
+/**
+ * Converts a date string in the format "yyyy-MM-dd HH:mm:ss" to "HH'h'mm".
+ *
+ * @param {string} dateString - The date string to convert.
+ * @returns {string} - The formatted date string.
+ */
+export const convertToHourFormat = (dateString: string): string => {
+  const date = parse(dateString, 'yyyy-MM-dd HH:mm:ss', new Date());
+  return format(date, "HH'h'mm");
+};
