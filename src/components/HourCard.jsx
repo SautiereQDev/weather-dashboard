@@ -1,7 +1,7 @@
 import {useWeatherContext} from "@/contexts/WeatherContext.jsx";
 import {convertToHourFormat} from "@/utils/date.ts";
 
-const Card = ({day, index}) => {
+const HourCard = ({day, index}) => {
 	const {weather, loading} = useWeatherContext()
 
 	if (loading) {
@@ -24,4 +24,4 @@ const Card = ({day, index}) => {
 	);
 };
 
-export default Card;
+export default HourCard;
