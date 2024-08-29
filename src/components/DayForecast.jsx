@@ -4,8 +4,6 @@ import { WeatherProvider } from "@/contexts/WeatherContext.jsx";
 import { getCurrentDate } from "@/utils/date.ts";
 import DayCard from "@/components/DayCard.jsx";
 
-// TODO:afficher les previsions pour les 4 jours à 12h
-// Prendre en compte les jours où l'heure actuelle dépasse 12h
 export const DayForecast = () => {
 	const { city } = useCityContext();
 
