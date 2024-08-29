@@ -34,10 +34,10 @@ const ErrorBoundary = ({children}) => {
 
 	if(hasError){
 		return (
-			<div className="bg-red-300 p-2">
+			<div className="bg-red-600 p-2 text-white flex flex-col">
 				<h1 className="text-lg font-bold text-center">Une erreur est survenue</h1>
-				<p className="text-md text-center">{error ? error.toString() : "Une erreur inconnue à eu lieu."}</p>
-				<button onClick={handleGoBack}>Revenir en arrière</button>
+				<p className="text-md text-center">{error ? error.toString().split(':')[1] : "Une erreur inconnue à eu lieu."}</p>
+				<button onClick={handleGoBack} className="border p-1 m-auto rounded-lg bg-white text-red-700 my-4">Revenir en arrière</button>
 			</div>
 		)
 	}
