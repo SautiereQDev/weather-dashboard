@@ -2,7 +2,7 @@ import { useWeatherContext } from "@/contexts/WeatherContext.jsx";
 import { convertDateToDay, convertToHourFormat } from "@/utils/date.ts";
 
 const DayCard = ({ index }) => {
-	const { weather, loading } = useWeatherContext();
+	const { weather, loading} = useWeatherContext();
 
 	if (loading) {
 		return <h1 className="text-2xl text-center text-gray-500">Loading...</h1>;

@@ -14,7 +14,7 @@ const SearchBar = () => {
 	}
 
 	return (
-			<form className="flex space-x-2">
+			<form className="flex gap-2">
 				<input type="text"
 				       className="border  rounded-lg px-2 bg-white text-gray-700 flex flex-center"
 				       placeholder="Entrez une ville..."
