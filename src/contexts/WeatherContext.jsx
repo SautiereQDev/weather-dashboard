@@ -1,13 +1,15 @@
-import {createContext, useContext, useEffect, useState} from "react";
-import {useCityContext} from "./CityContext.jsx";
-import {setParams} from "../utils/request.ts";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useCityContext } from "./CityContext.jsx";
+import { setParams } from "../utils/request.ts";
 
 const WeatherContext = createContext(null);
 
 export const WeatherProvider = ({ children }) => {
-	const {city} = useCityContext();
 	const [weather, setWeather] = useState(null);
 	const [loading, setLoading] = useState(true);
+
+	const { city } = useCityContext();
+
 	const baseURI = "https://api.openweathermap.org/data/2.5/forecast";
 	const URI = setParams(baseURI, {
 		appid: import.meta.env.VITE_API_KEY,
@@ -17,15 +19,21 @@ export const WeatherProvider = ({ children }) => {
 	});
 
 	useEffect(() => {
+		setLoading(true);
 		fetch(URI)
 			.then(res => res.json())
 			.then(data => {
-				setWeather(data);
+				if (data.cod === "404") {
+					setWeather(null);
+					throw new Error("La ville n'existe pas ou son nom est invalide !");
+				} else {
+					setWeather(data);
+				}
 				setLoading(false);
 			})
 			.catch(error => {
-				console.error(error);
 				setLoading(false);
+				throw new Error(error.message);
 			});
 	}, [city, URI]);
 
@@ -34,7 +42,7 @@ export const WeatherProvider = ({ children }) => {
 			{children}
 		</WeatherContext.Provider>
 	);
-}
+};
 
 export const useWeatherContext = () => {
 	return useContext(WeatherContext);
