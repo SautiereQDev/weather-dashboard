@@ -17,6 +17,7 @@
   cd weather-dashboard-master
   npm install
 ```
+- Created .env file with you [openweathermap](https://openweathermap.org/) API key
 - Run `npm run dev` to launch dev session at http://localhost:5173/
 ## Tech Stack
 
