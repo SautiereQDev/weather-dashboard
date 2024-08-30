@@ -21,13 +21,17 @@ export const HourForecast = () => {
 		return <h1 className="text-2xl text-center text-gray-500">Loading...</h1>;
 	}
 
+	if (!weather || !weather.list) {
+		return <h1 className="text-2xl text-center text-red-700">No data available</h1>;
+	}
+
 	return (
 		<ErrorBoundary>
 			<NavBar />
 			<h1 className="text-4xl font-bold text-center mt-3">Météo à {city}</h1>
 			<h2 className="text-xl text-center">{date}</h2>
 			<div className="flex gap-4 justify-evenly mt-6 mx-4">
-				{weather && weather.list.length > 0 ? (
+				{weather.list && weather.list.length > 0 ? (
 					[...Array(9)].map((_, i) => (
 						<HourCard key={i} index={i} day={day} />
 					))
