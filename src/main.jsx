@@ -9,12 +9,11 @@ import {WeatherProvider} from "@/contexts/WeatherContext.jsx";
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<BrowserRouter>
 		<ErrorBoundary>
-		  <CityProvider>
-			  <WeatherProvider>
-	        <App />
-			  </WeatherProvider>
-		  </CityProvider>
+			<CityProvider>
+				<WeatherProvider>
+					<App/>
+				</WeatherProvider>
+			</CityProvider>
 		</ErrorBoundary>
 	</BrowserRouter>
-
 )

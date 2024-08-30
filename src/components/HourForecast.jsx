@@ -33,7 +33,7 @@ export const HourForecast = () => {
 			<div className="flex gap-4 justify-evenly mt-6 mx-4">
 				{weather.list && weather.list.length > 0 ? (
 					[...Array(9)].map((_, i) => (
-						<HourCard key={i} index={i} day={day} />
+						<HourCard key={i} index={i} day={day}/>
 					))
 				) : (
 					<h1 className="text-2xl text-center text-red-700">No data available</h1>

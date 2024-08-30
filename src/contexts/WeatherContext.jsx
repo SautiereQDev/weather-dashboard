@@ -1,28 +1,30 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { useCityContext } from "./CityContext.jsx";
-import { setParams } from "../utils/request.ts";
+import {createContext, useContext, useEffect, useState} from "react";
+import {setParams} from "@/utils/request.ts"; // Importing setParams from its module
+import {useCityContext} from "@/contexts/CityContext.jsx"; // Importing useCityContext from its module
 
-const WeatherContext = createContext(null);
+const BASE_URI = "https://api.openweathermap.org/data/2.5/forecast";
+const API_KEY = import.meta.env.VITE_API_KEY;
 
-export const WeatherProvider = ({ children }) => {
+const WeatherContext = createContext();
+
+export const WeatherProvider = ({children}) => {
 	const [weather, setWeather] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const {city} = useCityContext();
 
-	const { city } = useCityContext();
-
-	const baseURI = "https://api.openweathermap.org/data/2.5/forecast";
-	const URI = setParams(baseURI, {
-		appid: import.meta.env.VITE_API_KEY,
-		q: city,
-		units: 'metric',
-		lang: 'fr'
-	});
-
-	useEffect(() => {
+	const fetchWeather = (cityName) => {
+		const params = {
+			appid: API_KEY,
+			q: cityName,
+			units: 'metric',
+			lang: 'fr',
+		};
+		const URI = setParams(BASE_URI, params);
 		setLoading(true);
+
 		fetch(URI)
-			.then(res => res.json())
-			.then(data => {
+			.then((res) => res.json())
+			.then((data) => {
 				if (data.cod === "404") {
 					setWeather(null);
 					throw new Error("La ville n'existe pas ou son nom est invalide !");
@@ -31,19 +33,23 @@ export const WeatherProvider = ({ children }) => {
 				}
 				setLoading(false);
 			})
-			.catch(error => {
+			.catch((error) => {
 				setLoading(false);
 				throw new Error(error.message);
 			});
-	}, [city, URI]);
+	};
+
+	useEffect(() => {
+		if (city) {
+			fetchWeather(city);
+		}
+	}, [city]);
 
 	return (
-		<WeatherContext.Provider value={{ weather, loading }}>
+		<WeatherContext.Provider value={{weather, loading}}>
 			{children}
 		</WeatherContext.Provider>
 	);
 };
 
-export const useWeatherContext = () => {
-	return useContext(WeatherContext);
-};
+export const useWeatherContext = () => useContext(WeatherContext);

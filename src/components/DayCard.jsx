@@ -1,7 +1,7 @@
 import { useWeatherContext } from "@/contexts/WeatherContext.jsx";
 import { convertDateToDay, convertToHourFormat } from "@/utils/date.ts";
 
-const DayCard = ({ index }) => {
+const DayCard = ({ index, city }) => {
 	const { weather, loading} = useWeatherContext();
 
 	if (loading) {
