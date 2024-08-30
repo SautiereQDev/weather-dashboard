@@ -1,62 +1,19 @@
-import {createContext, useState} from "react";
-import {NavBar} from "./components/NavBar.jsx";
-import useSearch from "./hooks/useSearch.jsx";
-import ForecastDay from "./components/ForecastDay.jsx";
-import {Outlet, useRoutes} from "react-router-dom";
-import ForecastHour from "./components/ForecastHour.jsx";
+import {DayForecast} from "@/components/DayForecast.jsx";
+import {Route, Routes} from "react-router-dom";
+import {HourForecast} from "@/components/HourForecast.jsx";
 
-export const ThemeContext = createContext(null);
-
-export const App = () => {
-    const routes = useRoutes([
-        {
-            path: '/',
-            element: <Root/>,
-        },
-        {
-            path: 'forecast',
-            element: <Outlet/>,
-            children: [
-                {
-                    path: 'day',
-                    element: <ForecastDay/>
-                },
-                {
-                    path: 'hour/:id',
-                    element: <ForecastHour/>
-                }
-            ]
-        }
-    ])
-
-    return routes
-}
-
-function Root() {
-    const [ville, setVille] = useState('');
-
-    function handleSubmit(ev) {
-        ev.preventDefault()
-        useSearch(ville)
-    }
-
-    const [theme, setTheme] = useState('light')
-
-    return (
-        <ThemeContext.Provider value={{theme, setTheme}}>
-            <NavBar/>
-            <main className="text-center mt-4">
-                <h1 className="text-3xl font-bold">Entrez le nom d'une ville</h1>
-                <form onSubmit={handleSubmit} className="flex justify-center align-center gap-3.5 mt-3">
-                    <input type="text" placeholder="Ville" onChange={(ev) => setVille(ev.target.value)}
-                           className="border rounded-lg px-1 "/>
-                    <button type="submit"
-                            className="border bg-sky-500 text-white rounded-lg p-1 align-center h-8">Valider
-                    </button>
-                </form>
-            </main>
-            <ForecastDay/>
-        </ThemeContext.Provider>)
+const App = () => {
+	return (
+		// TODO: Faire une home page avec des cards contenant les infos météo en temps réel des plus grandes villes de France
+		// TODO: Rendre cliquable les cards journalière vers la page de hourly_card correspondante au jour de la car clickée
+		// TODO: Afficher le nom du pays après avoir recherché une ville pour être sur que ce soit la bonne
+		// TODO: N'afficher que les heures restantes de la journée dans les hourly_forecast pour avoir des journées entière sur les pages suivantes
+		<Routes>
+			<Route path="/" element={<DayForecast/>}/>
+			<Route path="/daily_forecast" element={<DayForecast/>}/>
+			<Route path="/hourly_forecast" element={<HourForecast/>}/>
+		</Routes>
+	);
 }
 
 export default App;
