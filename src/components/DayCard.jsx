@@ -8,8 +8,6 @@ const DayCard = ({ index = 0, cityName, isCurrent = false }) => {
 	const { weather, loading } = useWeatherContext();
 	const { cityWeather, cityLoading } = useSearch(cityName, isCurrent);
 
-
-
 	if (loading || cityLoading) {
 		return <h1 className="text-2xl text-center text-gray-500">Loading...</h1>;
 	}
@@ -24,7 +22,11 @@ const DayCard = ({ index = 0, cityName, isCurrent = false }) => {
 		weatherData = cityWeather;
 	}
 	else {
-		weatherData = data.list[index * 9 + i - 1]
+		weatherData = data?.list?.[index * 9 + i - 1];
+	}
+
+	if (!weatherData) {
+		return null;
 	}
 
 	while (hour <= 12 && i < weatherData.length / 9) {
@@ -33,10 +35,6 @@ const DayCard = ({ index = 0, cityName, isCurrent = false }) => {
 			break;
 		}
 		i++;
-	}
-
-	if (!weatherData) {
-		return <h1 className="text-2xl text-center text-red-700">No valid data found</h1>;
 	}
 
 	return (
