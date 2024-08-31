@@ -27,7 +27,8 @@ const useGeolocation = (): GeolocationState => {
 
 	const error = (error: GeolocationPositionError) => {
 	  setState(prevState => ({ ...prevState, error }));
-	  throw new Error(error.message);
+	  console.log(error.message);
+	  return null;
 	};
 
 	const geoWatchId = navigator.geolocation.watchPosition(
