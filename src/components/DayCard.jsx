@@ -9,6 +9,8 @@ const DayCard = ({ index = 0, cityName }) => {
 	const { cityWeather, cityLoading } = useSearch(cityName);
 
 
+	const data = cityWeather ??  weather;
+
 	if (loading || cityLoading) {
 		return <h1 className="text-2xl text-center text-gray-500">Loading...</h1>;
 	}
@@ -16,14 +18,13 @@ const DayCard = ({ index = 0, cityName }) => {
 	let i = 0;
 	let hour = 0;
 
-	while (hour <= 12 && i < weather.list.length / 9) {
+	while (hour <= 12 && i < data.list.length / 9) {
 		hour = parseInt(convertToHourFormat(weather.list[index * 9 + i].dt_txt).split('h')[0], 10);
 		if (hour > 21) {
 			break;
 		}
 		i++;
 	}
-
 	const weatherData = cityName ? cityWeather.list[index * 9 + i - 1] : weather.list[index * 9 + i - 1];
 
 	if (!weatherData) {

@@ -5,7 +5,6 @@ import HomePage from "@/components/HomePage.jsx";
 
 const App = () => {
 	return (
-		// TODO: Faire une home page avec des cards contenant les infos météo en temps réel des plus grandes villes de France
 		// TODO: Rendre cliquable les cards journalière vers la page de hourly_card correspondante au jour de la car clickée
 		// TODO: Afficher le nom du pays après avoir recherché une ville pour être sur que ce soit la bonne
 		// TODO: N'afficher que les heures restantes de la journée dans les hourly_forecast pour avoir des journées entière sur les pages suivantes
