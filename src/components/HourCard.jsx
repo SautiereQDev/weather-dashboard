@@ -1,5 +1,6 @@
 import {useWeatherContext} from "@/contexts/WeatherContext.jsx";
 import {convertToHourFormat} from "@/utils/date.ts";
+import PropTypes from "prop-types";
 
 const HourCard = ({day, index}) => {
 	const {weather, loading} = useWeatherContext()
@@ -8,7 +9,7 @@ const HourCard = ({day, index}) => {
 		return <h1 className="text-2xl text-center text-gray-500">Loading...</h1>;
 	}
 
-	if (!weather >= weather.list.length) {
+	if (!weather || weather.list.length === 0) {
 		return <h1 className="text-2xl text-center text-red-700">No data available</h1>;
 	}
 
@@ -22,6 +23,11 @@ const HourCard = ({day, index}) => {
 			</div>
 		</div>
 	);
+};
+
+HourCard.propTypes = {
+	day: PropTypes.number.isRequired,
+	index: PropTypes.number.isRequired
 };
 
 export default HourCard;

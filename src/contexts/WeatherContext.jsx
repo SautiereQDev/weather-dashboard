@@ -20,7 +20,6 @@ export const WeatherProvider = ({children}) => {
 			lang: 'fr',
 		};
 		const URI = setParams(BASE_URI, params);
-		setLoading(true);
 
 		fetch(URI)
 			.then((res) => res.json())

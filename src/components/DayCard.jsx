@@ -1,14 +1,19 @@
+// src/components/DayCard.jsx
 import { useWeatherContext } from "@/contexts/WeatherContext.jsx";
-import { convertDateToDay, convertToHourFormat } from "@/utils/date.ts";
+import { convertToHourFormat, convertDateToDay } from "@/utils/date.ts";
+import useSearch from "@/hooks/useSearch.jsx";
+import PropTypes from "prop-types";
 
-const DayCard = ({ index, city }) => {
-	const { weather, loading} = useWeatherContext();
+const DayCard = ({ index = 0, cityName }) => {
+	const { weather, loading } = useWeatherContext();
+	const { cityWeather, cityLoading } = useSearch(cityName);
 
-	if (loading) {
+
+	if (loading || cityLoading) {
 		return <h1 className="text-2xl text-center text-gray-500">Loading...</h1>;
 	}
 
-	if (!weather || weather.list.length === 0) {
+	if (!weather || weather.list.length === 0 || !cityWeather || cityWeather.list.length === 0 ) {
 		return <h1 className="text-2xl text-center text-red-700">No data available</h1>;
 	}
 
@@ -23,7 +28,7 @@ const DayCard = ({ index, city }) => {
 		i++;
 	}
 
-	const weatherData = weather.list[index * 9 + i - 1];
+	const weatherData = cityName ? cityWeather.list[index * 9 + i - 1] : weather.list[index * 9 + i - 1];
 
 	if (!weatherData) {
 		return <h1 className="text-2xl text-center text-red-700">No valid data found</h1>;
@@ -39,6 +44,11 @@ const DayCard = ({ index, city }) => {
 			</div>
 		</div>
 	);
+};
+
+DayCard.propTypes = {
+	index: PropTypes.number,
+	cityName: PropTypes.string
 };
 
 export default DayCard;
