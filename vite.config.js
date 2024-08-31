@@ -11,4 +11,5 @@ export default defineConfig({
 			'@': '/src',
 		},
 	},
+	base: "C:\\Users\\sauti\\Workspace\\fac\\weather-dashboard"
 });
