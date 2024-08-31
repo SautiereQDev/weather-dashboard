@@ -6,10 +6,19 @@ dotenv.config();
 
 export default defineConfig({
 	plugins: [react()],
+	// base: '/weather-dashboard',
 	resolve: {
 		alias: {
 			'@': '/src',
 		},
 	},
-	base: "C:\\Users\\sauti\\Workspace\\fac\\weather-dashboard"
+	server: {
+		proxy: {
+			'/api': {
+				target: 'https://api.openweathermap.org',
+				changeOrigin: true,
+				rewrite: (path) => path.replace(/^\/api/, '')
+			}
+		}
+	}
 });

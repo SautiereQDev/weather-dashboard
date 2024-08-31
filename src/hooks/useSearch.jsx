@@ -1,10 +1,11 @@
 // src/hooks/useSearch.jsx
 import { useState, useEffect } from "react";
 
-const BASE_URI = "https://api.openweathermap.org/data/2.5/forecast";
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-const useSearch = (city) => {
+const useSearch = (city, isCurrent = false) => {
+
+	const BASE_URI = isCurrent ? "https://api.openweathermap.org/data/2.5/weather" : "https://api.openweathermap.org/data/2.5/forecast";
 	const [weather, setWeather] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);

@@ -3,6 +3,8 @@ import {Route, Routes} from "react-router-dom";
 import {HourForecast} from "@/components/HourForecast.jsx";
 import HomePage from "@/components/HomePage.jsx";
 
+
+
 const App = () => {
 	return (
 		// TODO: Rendre cliquable les cards journalière vers la page de hourly_card correspondante au jour de la car clickée
