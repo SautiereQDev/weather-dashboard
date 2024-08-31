@@ -6,7 +6,7 @@ import react from '@vitejs/plugin-react';
 dotenv.config();
 
 export default defineConfig({
-	plugins: [react(), eslint()],
+	plugins: [react()],
 	base: '/',
 	resolve: {
 		alias: {
