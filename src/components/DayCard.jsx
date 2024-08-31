@@ -1,7 +1,7 @@
 // src/components/DayCard.jsx
 import { useWeatherContext } from "@/contexts/WeatherContext.jsx";
 import { convertToHourFormat, convertDateToDay } from "@/utils/date.ts";
-import useSearch from "@/hooks/useSearch.jsx";
+import useSearch from "@/hooks/useFetchWeather.jsx";
 import PropTypes from "prop-types";
 
 const DayCard = ({ index = 0, cityName, isCurrent = false }) => {

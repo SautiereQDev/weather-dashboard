@@ -1,8 +1,15 @@
 import NavBar from "./NavBar.jsx";
 import {getCurrentDate} from "@/utils/date.ts";
 import DayCard from "@/components/DayCard.jsx";
+import useGeolocation from "@/hooks/useGeolocalisation.tsx";
 
 export const DayForecast = () => {
+
+	const {position, error} = useGeolocation();
+
+	if(position){
+		console.log(position)
+	}
 
 	// TODO: goélocaliser l'utilisateur et lui proposer la mété vers la ville la plus proche
 	return (

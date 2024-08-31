@@ -8,7 +8,6 @@ import ErrorBoundary from "@/components/ErrorBoundary.jsx";
 import {WeatherProvider} from "@/contexts/WeatherContext.jsx";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-	<React.StrictMode>
 	<BrowserRouter>
 		<ErrorBoundary>
 			<CityProvider>
@@ -18,5 +17,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 			</CityProvider>
 		</ErrorBoundary>
 	</BrowserRouter>
-	</React.StrictMode>
 )
