@@ -1,7 +1,23 @@
 import { useState, useEffect } from "react";
 
+/**
+ * The API key used for authentication.
+ *
+ * @type {string}
+ * @readonly
+ */
 const API_KEY = import.meta.env.VITE_API_KEY;
 
+/**
+ * A custom hook for fetching weather data for a specified city.
+ *
+ * @param {string} city - The name of the city for which to fetch weather data.
+ * @param {boolean} [isCurrent=false] - Specifies whether to fetch current weather data or forecast data.
+ * @returns {Object} An object containing the fetched weather data, loading state, and error state.
+ *                  - `cityWeather`: The fetched weather data.
+ *                  - `cityLoading`: A boolean indicating whether the data is still loading.
+ *                  - `error`: An error message if an error occurred during the fetch.
+ */
 const useFetchWeather = (city, isCurrent = false) => {
 
 	const BASE_URI = isCurrent ? "https://api.openweathermap.org/data/2.5/weather" : "https://api.openweathermap.org/data/2.5/forecast";
