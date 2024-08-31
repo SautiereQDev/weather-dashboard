@@ -1,49 +1,57 @@
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const ErrorBoundary = ({children}) => {
-	const [hasError, setHasError] = useState(false);
-	const [error, setError] = useState(null);
+const ErrorBoundary = ({ children }) => {
+  const [hasError, setHasError] = useState(false);
+  const [error, setError] = useState(null);
 
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	useEffect(() => {
-		const handleError = (event) => {
-			setHasError(true);
-			setError(event.error);
-		};
+  useEffect(() => {
+    const handleError = (event) => {
+      setHasError(true);
+      setError(event.error);
+    };
 
-		const handlePromiseRejection = (event) => {
-			setHasError(true);
-			setError(event.reason);
-		}
+    const handlePromiseRejection = (event) => {
+      setHasError(true);
+      setError(event.reason);
+    };
 
-		window.addEventListener('error', handleError)
-		window.addEventListener('unhandledrejection', handlePromiseRejection)
-		return () => {
-			window.removeEventListener('error', handleError);
-			window.removeEventListener('unhandledrejection', handlePromiseRejection);
-		}
-	}, []);
+    window.addEventListener('error', handleError);
+    window.addEventListener('unhandledrejection', handlePromiseRejection);
+    return () => {
+      window.removeEventListener('error', handleError);
+      window.removeEventListener('unhandledrejection', handlePromiseRejection);
+    };
+  }, []);
 
-	const handleGoBack = () => {
-		setHasError(false)
-		setError(null)
-		navigate(-1)
-	}
+  const handleGoBack = () => {
+    setHasError(false);
+    setError(null);
+    navigate(-1);
+  };
 
-	if(hasError){
-		return (
-			<div className="bg-red-600 p-2 text-white flex flex-col">
-				<h1 className="text-lg font-bold text-center">Une erreur est survenue</h1>
-				<p className="text-md text-center">{error ? error.toString().split(':')[1] : "Une erreur inconnue à eu lieu."}</p>
-				<button onClick={handleGoBack} className="border p-1 m-auto rounded-lg bg-white text-red-700 my-4">Revenir en arrière</button>
-			</div>
-		)
-	}
+  if (hasError) {
+    return (
+      <div className="bg-red-600 p-2 text-white flex flex-col">
+        <h1 className="text-lg font-bold text-center">Une erreur est survenue</h1>
+        <p className="text-md text-center">
+          {error ? error.toString().split(':')[1] : 'Une erreur inconnue à eu lieu.'}
+        </p>
+        <button onClick={handleGoBack} className="border p-1 m-auto rounded-lg bg-white text-red-700 my-4">
+          Revenir en arrière
+        </button>
+      </div>
+    );
+  }
 
-	return children;
+  return children;
+};
 
+ErrorBoundary.propTypes = {
+  children: PropTypes.node.isRequired
 };
 
 export default ErrorBoundary;

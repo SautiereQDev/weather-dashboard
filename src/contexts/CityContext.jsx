@@ -1,17 +1,16 @@
-import {createContext, useContext, useState} from 'react';
+import React, { createContext, useState } from 'react';
+import PropTypes from 'prop-types';
 
 const CityContext = createContext(null);
 
 export const CityProvider = ({ children }) => {
-	const [city, setCity] = useState('Paris');
+  const [city, setCity] = useState('Paris');
 
-	return (
-		<CityContext.Provider value={{ city, setCity }}>
-			{children}
-		</CityContext.Provider>
-	);
+  return <CityContext.Provider value={{ city, setCity }}>{children}</CityContext.Provider>;
 };
 
-export const useCityContext = () => {
-	return useContext(CityContext);
+CityProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
+
+export default CityContext;
