@@ -11,5 +11,13 @@ export default defineConfig({
 			'@': '/src',
 		},
 	},
-	base: "C:\\Users\\sauti\\Workspace\\fac\\weather-dashboard"
+	server: {
+		proxy: {
+			'/api': {
+				target: 'https://api.openweathermap.org',
+				changeOrigin: true,
+				rewrite: (path) => path.replace(/^\/api/, '')
+			}
+		}
+	}
 });
