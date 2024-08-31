@@ -7,7 +7,7 @@ dotenv.config();
 
 export default defineConfig({
 	plugins: [react(), eslint()],
-	// base: '/weather-dashboard',
+	base: '/'
 	resolve: {
 		alias: {
 			'@': '/src',
