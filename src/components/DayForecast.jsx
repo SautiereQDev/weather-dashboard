@@ -1,5 +1,5 @@
 import NavBar from './NavBar.jsx';
-import { useCityContext } from '@/contexts/CityContext.jsx';
+import { useCityContext } from '@/hooks/useCityContext.jsx';
 import { WeatherProvider } from '@/contexts/WeatherContext.jsx';
 import { getCurrentDate } from '@/utils/date.ts';
 import DayCard from '@/components/DayCard.jsx';

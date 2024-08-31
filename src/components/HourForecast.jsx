@@ -1,6 +1,6 @@
 import NavBar from '@/components/NavBar.jsx';
 import HourCard from '@/components/HourCard.jsx';
-import { useCityContext } from '@/contexts/CityContext.jsx';
+import { useCityContext } from '@/hooks/useCityContext.jsx';
 import { useWeatherContext } from '@/contexts/WeatherContext.jsx';
 import { useEffect, useState } from 'react';
 import { getCurrentDate, getUpdatedDate } from '@/utils/date.ts';

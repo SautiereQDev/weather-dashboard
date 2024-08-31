@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { setParams } from '@/utils/request.ts'; // Importing setParams from its module
-import { useCityContext } from '@/contexts/CityContext.jsx';
+import { useCityContext } from '@/hooks/useCityContext.jsx';
 import PropTypes from 'prop-types'; // Importing useCityContext from its module
 
 const BASE_URI = 'https://api.openweathermap.org/data/2.5/forecast';

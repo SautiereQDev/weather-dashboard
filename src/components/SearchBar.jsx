@@ -1,6 +1,6 @@
 import { TbSearch } from 'react-icons/tb';
 import { useState } from 'react';
-import { useCityContext } from '@/contexts/CityContext.jsx';
+import { useCityContext } from '@/hooks/useCityContext.jsx';
 
 const SearchBar = () => {
   const { setCity } = useCityContext();
