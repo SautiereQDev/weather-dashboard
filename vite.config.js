@@ -7,7 +7,7 @@ dotenv.config();
 
 export default defineConfig({
 	plugins: [react(), eslint()],
-	base: '/'
+	base: '/',
 	resolve: {
 		alias: {
 			'@': '/src',
