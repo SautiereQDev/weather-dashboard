@@ -9,7 +9,7 @@ const DayCard = ({ index = 0, cityName }) => {
 	const { cityWeather, cityLoading } = useSearch(cityName);
 
 
-	const data = cityName ??  weather;
+	const data = cityWeather ??  weather;
 
 	if (loading || cityLoading) {
 		return <h1 className="text-2xl text-center text-gray-500">Loading...</h1>;
@@ -25,7 +25,6 @@ const DayCard = ({ index = 0, cityName }) => {
 		}
 		i++;
 	}
-
 	const weatherData = cityName ? cityWeather.list[index * 9 + i - 1] : weather.list[index * 9 + i - 1];
 
 	if (!weatherData) {
