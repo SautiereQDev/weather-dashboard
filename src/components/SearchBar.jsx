@@ -10,7 +10,6 @@ const SearchBar = () => {
 	function handleClick(ev) {
 		ev.preventDefault()
 		setCity(inputValue)
-		console.log("City updated to:", inputValue)
 	}
 
 	return (

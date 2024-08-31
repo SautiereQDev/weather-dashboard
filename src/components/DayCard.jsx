@@ -13,10 +13,6 @@ const DayCard = ({ index = 0, cityName }) => {
 		return <h1 className="text-2xl text-center text-gray-500">Loading...</h1>;
 	}
 
-	if (!weather || weather.list.length === 0 || !cityWeather || cityWeather.list.length === 0 ) {
-		return <h1 className="text-2xl text-center text-red-700">No data available</h1>;
-	}
-
 	let i = 0;
 	let hour = 0;
 

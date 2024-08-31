@@ -1,4 +1,4 @@
-import { setParams } from "@/utils/request.ts";
+// src/hooks/useSearch.jsx
 import { useState, useEffect } from "react";
 
 const BASE_URI = "https://api.openweathermap.org/data/2.5/forecast";
@@ -6,17 +6,24 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 
 const useSearch = (city) => {
 	const [weather, setWeather] = useState(null);
-	const [loading, setLoading] = useState(true)
-
-	const params = {
-		appid: API_KEY,
-		q: city,
-		units: 'metric',
-		lang: 'fr',
-	};
-	const URI = setParams(BASE_URI, params);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(null);
 
 	useEffect(() => {
+		if (!city) {
+			setLoading(false);
+			return;
+		}
+
+		const params = {
+			appid: API_KEY,
+			q: city,
+			units: 'metric',
+			lang: 'fr',
+		};
+		const URI = `${BASE_URI}?${new URLSearchParams(params).toString()}`;
+
+		setLoading(true);
 		fetch(URI)
 			.then((res) => res.json())
 			.then((data) => {
@@ -27,15 +34,16 @@ const useSearch = (city) => {
 				} else {
 					setWeather(data);
 				}
-				setLoading(false)
 			})
 			.catch((error) => {
-				setLoading(false)
-				throw new Error(error.message)
+				setError(error.message);
+			})
+			.finally(() => {
+				setLoading(false);
 			});
-	}, [URI, city]);
+	}, [city]);
 
-	return { cityWeather: weather, cityLoading: loading };
+	return { cityWeather: weather, cityLoading: loading, error };
 };
 
 export default useSearch;
