@@ -29,3 +29,9 @@ dist-ssr
 .idea
 
 *.txt
+
+#linters
+*.eslintrc.cjs
+*.eslintignore
+*.prettierignore
+*.prettierrc
