@@ -36,7 +36,14 @@ const DayCard = ({ index = 0, cityName }) => {
 
 	return (
 		<div className="border py-3 mt-3 text-center m-auto w-full">
-			<h1 className="text-2xl font-bold">{convertDateToDay(weatherData.dt_txt)}</h1>
+			{cityName && (
+				<p className="text-2xl font-bold">
+					{cityName}
+				</p>
+			)}
+			{!cityName && (
+				<h1 className="text-2xl font-bold">{convertDateToDay(weatherData.dt_txt)}</h1>
+			)}
 			<h2 className="text-xl">{weatherData.weather[0].main}</h2>
 			<div className="flex justify-center gap-4">
 				<img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt="weather icon" />
