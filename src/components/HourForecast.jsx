@@ -1,7 +1,7 @@
 import NavBar from '@/components/NavBar.jsx';
 import HourCard from '@/components/HourCard.jsx';
 import { useCityContext } from '@/hooks/useCityContext.jsx';
-import { useWeatherContext } from '@/contexts/WeatherContext.jsx';
+import { useWeatherContext } from '@/hooks/useWeatherContext.jsx';
 import { useEffect, useState } from 'react';
 import { getCurrentDate, getUpdatedDate } from '@/utils/date.ts';
 import ErrorBoundary from '@/components/ErrorBoundary.jsx';

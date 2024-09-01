@@ -1,4 +1,4 @@
-import { useWeatherContext } from '@/contexts/WeatherContext.jsx';
+import { useWeatherContext } from '@/hooks/useWeatherContext.jsx';
 import { convertToHourFormat } from '@/utils/date.ts';
 import PropTypes from 'prop-types';
 

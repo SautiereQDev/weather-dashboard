@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { setParams } from '@/utils/request.ts'; // Importing setParams from its module
 import { useCityContext } from '@/hooks/useCityContext.jsx';
 import PropTypes from 'prop-types'; // Importing useCityContext from its module
@@ -52,4 +52,4 @@ WeatherProvider.propTypes = {
   children : PropTypes.node.isRequired
 }
 
-export const useWeatherContext = () => useContext(WeatherContext);
+export default WeatherContext;
