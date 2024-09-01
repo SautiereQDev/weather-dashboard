@@ -1,14 +1,30 @@
-import { useEffect } from 'react';
-import useGeolocation from '@/hooks/useGeolocation.tsx';
+import { useEffect, useState } from 'react';
 import { useCityContext } from '@/hooks/useCityContext.jsx';
 import NavBar from '@/components/NavBar.jsx';
 import useClosestCity from '@/hooks/useClosestCity.tsx';
 import DayCard from '@/components/DayCard.jsx';
 import { getCurrentDate } from '@/utils/date.ts';
+import { getLocation } from '@/utils/geolocate.ts';
 
 const HomePage = () => {
-  const { position } = useGeolocation();
   const { city, setCity } = useCityContext();
+
+  const [position, setPosition] = useState(null);
+
+  useEffect(() => {
+    const fetchLocation = async () => {
+      try {
+        const loc = await getLocation();
+        setPosition(loc);
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
+
+    if (sessionStorage.getItem('located')) {
+      fetchLocation();
+    }
+  }, []);
 
   const closestCity = useClosestCity(
     position

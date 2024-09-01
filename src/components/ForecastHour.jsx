@@ -11,7 +11,6 @@ const ForecastHour = () => {
 
   useEffect(() => {
     const abortController = new AbortController();
-
     fetch(
       `https://api.weatherapi.com/v1/forecast.json?key=${import.meta.env.VITE_WEATHER_API_KEY}&q=Paris&days=10&aqi=no&alerts=no&lang=fr`,
     )
