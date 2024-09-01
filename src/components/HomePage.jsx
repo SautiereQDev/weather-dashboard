@@ -6,7 +6,7 @@ import DayCard from '@/components/DayCard.jsx';
 import { getCurrentDate } from '@/utils/date.ts';
 
 const HomePage = () => {
-  const { city, setCity } = useCityContext();
+  const { city } = useCityContext();
   useClosestCity();
 
   useEffect(() => {
